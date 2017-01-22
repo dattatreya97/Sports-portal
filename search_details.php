@@ -29,7 +29,11 @@
 					$result1 = mysqli_query($dbc,$query1) or die(mysqli_error($dbc));
 					?>
 					<table class="table table-striped">
-					<?php
+					<?php 
+					if(mysqli_num_rows($result1)==0){
+						echo '<div class="col-sm-3 col-sm-push-2 incorrect""><label>Not Registered!</label></div>';
+					}
+					else{
 					while ($row = mysqli_fetch_array($result1)) {
 						$delnumber = $row['delegate_number'];
 						$NAME = $row['name'];
@@ -47,6 +51,7 @@
 						</tr>
 						<?php
 					}
+				}
 					?>
 					</table>
 					<?php
@@ -58,6 +63,10 @@
 					?>
 					<table class="table table-striped">
 					<?php
+					if(mysqli_num_rows($result2)==0){
+						echo '<div class="col-sm-3 col-sm-push-2 incorrect""><label>Not Registered!</label></div>';
+					}
+					else{
 					while ($row = mysqli_fetch_array($result2)) {
 						$delnumber = $row['delegate_number'];
 						$NAME = $row['Name'];
@@ -74,7 +83,7 @@
 							<td><?php echo $Phone; ?></td>
 						</tr>
 						<?php
-					}
+					}}
 					?>
 					</table>
 					<?php
@@ -88,8 +97,12 @@
 						$query3 = "SELECT * FROM Football WHERE teamID = '$teamID'";
 					}
 					$result3 = mysqli_query($con,$query3) or die(mysqli_error($con));
+					if(mysqli_num_rows($result3)==0){
+						echo '<div class="col-sm-3 col-sm-push-2 incorrect""><label>Not Registered!</label></div>';
+					}
+					else{
 					$row = mysqli_fetch_array($result3);
-					display_details($row['delegate_numbers']);
+					display_details($row['delegate_numbers']);}
 				}
 
 				if (empty($teamID) && empty($RegNo) && empty($name)) {
